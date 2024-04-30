@@ -1,0 +1,14 @@
+---
+layout: layouts/base.njk
+---
+
+<h2>Blog</h2>
+
+{%- for post in collections.post -%}
+    <article class="snippet" role="listitem" aria-label="Article title">
+        <a href="{{ post.url }}">
+            {{ post.data.title }} | 
+            <small class="date" aria-label="Posted at date">{{ post.data.date | date("MMM YYYY") }}</small>
+        </a>
+    </article>
+{%- endfor -%}

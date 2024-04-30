@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" class="fill">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="description" content="IDK what to put here">
+    <meta name="keywords" content="I guess you could ask an SEO hack">
+    <meta name="author" content="Third joke">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Blog</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body class="fill">
+    <div class="container vertical fill">
+        <main class="flex-grow">
+            <header class="container horizontal" role="banner">
+                <a href="/" class="logo nostyle" title="logo" aira-label="logo">
+                    Your Site Logo
+                </a>
+                <nav class="menu flex-grow justify-end">
+                    <ul class="container nostyle justify-end">
+                        <li><a href="/blog">blog</a></li>
+                        <li><a href="/about">about</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <div id="content" class="flex-grow">
+                {{ content | safe }}
+            </div>
+        </main>
+    </div>
+</body>
+</html>

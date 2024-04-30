@@ -1,0 +1,59 @@
+---
+layout: layouts/base.njk
+---
+
+<!-- This invisible iframe nonsense is a janky hack, but as far as I can tell it's the best option.
+
+All I want is a callback when the form is submitted so I can clear the text field. But the only one
+I have access to is triggered before it's safe to clear it! What's more, the form will redirect the
+page when it's submitted, and you can't turn that off! The best you can do is redirect a new tab or
+iframe instead. So the workaround for both of these is to dump the form to this hidden iframe, then
+use the iframe reloading as an indicator that the form was submitted. Which is ten kinds of stupid.
+This would all be trivial in JavaScript... except I use a static web host for this site, and I send
+dynamic requests like this to a separate endpoint. That breaks CORS, so I'm not able to do it using
+JavaScript for security reasons. I could switch to a different build tool that supports custom HTTP
+headers in develpment or pay for actual web hosting, but I like this tech stack so here we are. -->
+<div class="fade-container">
+    <div id="feedback-request">
+        <h2>Anonymous feedback</h2>
+        <p>I appreciate candid feedback on my work. If you have anything you'd prefer to say anonymously, feel free to use the form below.</p>
+
+        <iframe name="invisible" id="invisible" style="display: none;" onload="onFormReceive(this, 'foo')"></iframe>
+        <form
+            action="https://script.google.com/macros/s/AKfycbxoD2emFV2OXN8dwNzxOg0TfBKaGcSIg1eF4NKNvvjB5oxfkpSK7CmZGdLW1aY6bwqhgg/exec"
+            method="post"
+            onsubmit="onFormSubmit(this)"
+            id="feedback-form"
+            target="invisible">
+            <textarea form="feedback-form" name="message"></textarea>
+            <input type="submit" value="send" name="submitButton"></input>
+        </form>
+    </div>
+    <div id="feedback-thanks" class="fade-downward">
+        <h2>Thanks!</h2>
+        <p>I got your message.</p>
+    </div>
+</div>
+
+<script>
+var state = 'waiting';
+
+function onFormSubmit(form) {
+    if (state == 'waiting') {
+        state = 'loading';
+
+        form.classList.add('loading');
+    }
+}
+
+function onFormReceive() {
+    if (state == 'loading') {
+        state = 'sent';
+
+        const request = document.getElementById('feedback-request');
+        const thanks = document.getElementById('feedback-thanks');
+        request.classList.add('fade-upward');
+        thanks.classList.remove('fade-downward');
+    }
+}
+</script>

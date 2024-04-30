@@ -1,0 +1,27 @@
+{
+  "name": "Alex",
+  "version": "1.0.0",
+  "description": "Alex's website",
+  "main": "dist/index.html",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "dev": "eleventy --serve",
+    "watch": "eleventy --watch",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [],
+  "author": "Alex",
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
+    "node-gyp": "^8.0.0",
+    "three": "^0.127.0",
+    "turbolinks": "^5.2.0"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy-plugin-rss": "^1.1.1",
+    "nunjucks-date-filter": "^0.1.1"
+  }
+}
